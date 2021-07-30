@@ -6,14 +6,13 @@ $snowy-bg-color: linear-gradient(
 
 $cloudy-bg-color: linear-gradient(
   to bottom right,
-  hsl(194, 60%, 53%),
-  hsl(194, 60%, 63%)
+  hsl(217, 96%, 81%) 0%,
+  hsl(199, 88%, 87%) 100%
 );
-
 $sunny-bg-color: linear-gradient(
-  to bottom right,
-  hsl(15, 100%, 70%),
-  hsl(15, 100%, 75%)
+  120deg,
+  hsl(46, 89%, 68%) 0%,
+  hsl(13, 97%, 76%) 100%
 );
 
 $thunder-bg-color: linear-gradient(
