@@ -26,12 +26,10 @@ export default defineComponent({
     },
     getDate() {
       const date = new Date();
-      const [weekday, day, month] = [
-        date.getDay(),
-        date.getDate(),
-        date.getMonth(),
-      ];
-      return `${getWeekDayString(weekday)}, ${day} ${getMonth(month)}`;
+      const month = date.toLocaleString('default', { month: 'long' });
+      const weekday = date.toLocaleString('default', { weekday: 'long' });
+
+      return `${weekday}, ${date.getDate()} ${month}`;
     },
     getHour() {
       const date = new Date();
@@ -39,8 +37,11 @@ export default defineComponent({
     },
   },
 });
+
 // eslint-disable-next-line no-unused-vars
 function getApiPromise() {
+  Date.prototype.toLocaleString('default', { weekday: 'long' });
+
   navigator.geolocation.getCurrentPosition((position) => {
     const { latitude, longitude } = position.coords;
     axios
@@ -55,25 +56,6 @@ function getApiPromise() {
       })
       .catch((err) => console.error(err));
   });
-}
-
-function getWeekDayString(date: number) {
-  switch (date) {
-    case 0:
-      return 'Sunday';
-    case 1:
-      return 'Monday';
-    case 2:
-      return 'Thursday';
-    case 3:
-      return 'Wednesday';
-    case 4:
-      return 'Tuesday';
-    case 5:
-      return 'Friday';
-    case 6:
-      return 'Sunday';
-  }
 }
 </script>
 
