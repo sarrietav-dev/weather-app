@@ -33,7 +33,7 @@ export default defineComponent({
     return {
       location: 'Cartagena',
       weather: {
-        main: 'Rain',
+        main: 'Clear',
         description: 'Very clear',
       },
       temperature: 200,
@@ -141,6 +141,16 @@ body {
 
 .clear {
   background-image: $sunny-bg-color;
+
+  .weather-icon {
+    animation: spin 4s linear infinite;
+  }
+
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 }
 
 .clouds,
