@@ -1,6 +1,7 @@
 <template>
   <div :class="getBgColor" id="background">
     {{ location }} {{ getDate }} {{ getHour }}
+    <img :src="getSVGsrc" alt="Weather status image" />
   </div>
 </template>
 
@@ -48,10 +49,19 @@ export default defineComponent({
       const date = new Date();
       return `${date.getHours()}:${date.getMinutes()}`;
     },
+    getSVGsrc() {
+      if (this.weather.main === 'Rain') return require('@/assets/rain.svg');
+      if (this.weather.main === 'Thunderstorm')
+        return require('@/assets/thunderstorm.svg');
+      if (this.weather.main === 'Snow') return require('@/assets/snow.svg');
+      if (this.weather.main === 'Clear')
+        return require('@/assets/day-sunny.svg');
+      return require('@/assets/day-cloudy.svg');
+    },
   },
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getApiPromise() {
   Date.prototype.toLocaleString('default', { weekday: 'long' });
 
@@ -61,7 +71,7 @@ function getApiPromise() {
       .get<CurrentWeatherDataResponse>(
         `api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=8e71173fd511d2582e29c50306f73b14`,
       )
-      .then((response) => {
+      .then(() => {
         //this.temperature = response.data.main.temp;
         //this.location = response.data.name;
         //const { main, description } = response.data.weather[0];
