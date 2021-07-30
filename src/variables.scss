@@ -1,0 +1,23 @@
+$snowy-bg-color: linear-gradient(
+  to bottom right,
+  hsl(0, 0%, 75%),
+  hsl(0, 0%, 100%)
+);
+
+$cloudy-bg-color: linear-gradient(
+  to bottom right,
+  hsl(194, 60%, 53%),
+  hsl(194, 60%, 63%)
+);
+
+$sunny-bg-color: linear-gradient(
+  to bottom right,
+  hsl(15, 100%, 70%),
+  hsl(15, 100%, 75%)
+);
+
+$thunder-bg-color: linear-gradient(
+  to bottom right,
+  hsl(249, 30%, 15%),
+  hsl(249, 30%, 25%)
+);

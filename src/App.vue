@@ -60,6 +60,8 @@ function getApiPromise() {
 </script>
 
 <style lang="scss">
+@import 'variables.scss';
+
 *,
 *::before,
 *::after {
@@ -71,27 +73,6 @@ function getApiPromise() {
 :root {
   font-size: 62.5%;
   box-sizing: border-box;
-
-  --snowy-bg-color: linear-gradient(
-    to bottom right,
-    hsl(0, 0%, 75%),
-    hsl(0, 0%, 100%)
-  );
-  --cloudy-bg-color: linear-gradient(
-    to bottom right,
-    hsl(194, 60%, 53%),
-    hsl(194, 60%, 63%)
-  );
-  --sunny-bg-color: linear-gradient(
-    to bottom right,
-    hsl(15, 100%, 70%),
-    hsl(15, 100%, 75%)
-  );
-  --thunder-bg-color: linear-gradient(
-    to bottom right,
-    hsl(249, 30%, 15%),
-    hsl(249, 30%, 25%)
-  );
 }
 
 body {
@@ -105,18 +86,18 @@ body {
 }
 
 .clear {
-  background-image: var(--sunny-bg-color);
+  background-image: $sunny-bg-color;
 }
 
 .clouds {
-  background-image: var(--cloudy-bg-color);
+  background-image: $cloudy-bg-color;
 }
 
 .snow {
-  background-image: var(--snowy-bg-color);
+  background-image: $snowy-bg-color;
 }
 
 .thunderstorm {
-  background-image: var(--thunder-bg-color);
+  background-image: $thunder-bg-color;
 }
 </style>
