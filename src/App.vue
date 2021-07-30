@@ -75,6 +75,7 @@ export default defineComponent({
               lat: latitude,
               lon: longitude,
               appid: '8e71173fd511d2582e29c50306f73b14',
+              units: 'metric',
             },
           },
         )
