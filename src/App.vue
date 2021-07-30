@@ -6,11 +6,24 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import {
+  CurrentWeatherDataResponse,
+  WeatherCondition,
+} from './types/weather-api';
 import axios from 'axios';
+
+interface AppState {
+  location: string;
+  weather: {
+    main: WeatherCondition;
+    description: string;
+  };
+  temperature: number;
+}
 
 export default defineComponent({
   name: 'App',
-  data() {
+  data(): AppState {
     return {
       location: 'Cartagena',
       weather: {
@@ -45,7 +58,7 @@ function getApiPromise() {
   navigator.geolocation.getCurrentPosition((position) => {
     const { latitude, longitude } = position.coords;
     axios
-      .get(
+      .get<CurrentWeatherDataResponse>(
         `api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=8e71173fd511d2582e29c50306f73b14`,
       )
       .then((response) => {
