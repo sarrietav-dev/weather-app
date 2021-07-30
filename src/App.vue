@@ -21,7 +21,7 @@ import axios from 'axios';
 interface AppState {
   location: string;
   weather: {
-    main: WeatherCondition;
+    main: WeatherCondition | '';
     description: string;
   };
   temperature: number;
@@ -31,12 +31,12 @@ export default defineComponent({
   name: 'App',
   data(): AppState {
     return {
-      location: 'Cartagena',
+      location: '',
       weather: {
-        main: 'Clear',
-        description: 'Very clear',
+        main: '',
+        description: '',
       },
-      temperature: 200,
+      temperature: 0,
     };
   },
   computed: {
@@ -63,6 +63,29 @@ export default defineComponent({
         return require('@/assets/day-sunny.svg');
       return require('@/assets/day-cloudy.svg');
     },
+  },
+  created() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      axios
+        .get<CurrentWeatherDataResponse>(
+          'http://api.openweathermap.org/data/2.5/weather',
+          {
+            params: {
+              lat: latitude,
+              lon: longitude,
+              appid: '8e71173fd511d2582e29c50306f73b14',
+            },
+          },
+        )
+        .then((response) => {
+          this.temperature = response.data.main.temp;
+          this.location = response.data.name;
+          const { main, description } = response.data.weather[0];
+          this.weather = { main, description };
+        })
+        .catch((err) => console.error(err));
+    });
   },
 });
 
