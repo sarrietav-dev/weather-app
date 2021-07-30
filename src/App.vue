@@ -1,7 +1,12 @@
 <template>
   <div :class="getBgColor" id="background">
-    {{ location }} {{ getDate }} {{ getHour }}
-    <img :src="getSVGsrc" alt="Weather status image" />
+    <header>
+      <p class="date">{{ getDate }}</p>
+      <p class="time">{{ getHour }}</p>
+      <p class="location">{{ location }}</p>
+    </header>
+    <img :src="getSVGsrc" class="weather-icon" />
+    <p class="temperature">{{ temperature }} °C</p>
   </div>
 </template>
 
@@ -28,7 +33,7 @@ export default defineComponent({
     return {
       location: 'Cartagena',
       weather: {
-        main: 'Thunderstorm',
+        main: 'Rain',
         description: 'Very clear',
       },
       temperature: 200,
@@ -100,13 +105,38 @@ function getApiPromise() {
 
 body {
   height: 100vh;
-  color: hsl(0, 0%, 80%);
+  color: #fff;
   font-family: 'Roboto', sans-serif;
 }
 
 #app,
 #background {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 2rem;
+
+  header {
+    & > * {
+      margin: 1rem 0;
+    }
+
+    text-align: center;
+    .time {
+      font-size: 4rem;
+    }
+  }
+
+  .weather-icon {
+    width: 15%;
+    filter: brightness(300%);
+  }
+
+  .temperature {
+    font-size: 4rem;
+  }
 }
 
 .clear {
