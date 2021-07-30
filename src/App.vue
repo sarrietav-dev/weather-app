@@ -91,7 +91,7 @@ function getApiPromise() {
 body {
   height: 100vh;
   color: hsl(0, 0%, 80%);
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 #app,
@@ -103,7 +103,10 @@ body {
   background-image: $sunny-bg-color;
 }
 
-.clouds {
+.clouds,
+.atmosphere,
+.rain,
+.drizzle {
   background-image: $cloudy-bg-color;
 }
 
