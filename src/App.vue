@@ -88,26 +88,6 @@ export default defineComponent({
     });
   },
 });
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getApiPromise() {
-  Date.prototype.toLocaleString('default', { weekday: 'long' });
-
-  navigator.geolocation.getCurrentPosition((position) => {
-    const { latitude, longitude } = position.coords;
-    axios
-      .get<CurrentWeatherDataResponse>(
-        `api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=8e71173fd511d2582e29c50306f73b14`,
-      )
-      .then(() => {
-        //this.temperature = response.data.main.temp;
-        //this.location = response.data.name;
-        //const { main, description } = response.data.weather[0];
-        //this.weather = { main, description };
-      })
-      .catch((err) => console.error(err));
-  });
-}
 </script>
 
 <style lang="scss">
