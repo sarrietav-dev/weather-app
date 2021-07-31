@@ -71,23 +71,18 @@ export default defineComponent({
       return `${date.getHours()}:${date.getMinutes()}`;
     },
     getSVGsrc() {
-      const hour = Date.prototype.getHours();
-      if (hour > 6 && hour < 18) {
-        if (this.weather.main === 'Rain') return require('@/assets/rain.svg');
-        if (this.weather.main === 'Thunderstorm')
-          return require('@/assets/thunderstorm.svg');
-        if (this.weather.main === 'Snow') return require('@/assets/snow.svg');
-        if (this.weather.main === 'Clear')
-          return require('@/assets/day-sunny.svg');
-        return require('@/assets/day-cloudy.svg');
-      }
-      if (this.weather.main === 'Rain') return require('@/assets/rain.svg');
-      if (this.weather.main === 'Thunderstorm')
-        return require('@/assets/thunderstorm.svg');
-      if (this.weather.main === 'Snow') return require('@/assets/snow.svg');
+      const hour = new Date().getMonth();
+      const dayPeriod = hour > 6 && hour < 18 ? 'day' : 'night';
+
+      if (this.weather.main === 'Rain')
+        return require(`@/assets/${dayPeriod}/rain.svg`);
+      if (this.weather.main === `Thunderstorm`)
+        return require(`@/assets/${dayPeriod}/thunderstorm.svg`);
+      if (this.weather.main === 'Snow')
+        return require(`@/assets/${dayPeriod}/snow.svg`);
       if (this.weather.main === 'Clear')
-        return require('@/assets/day-sunny.svg');
-      return require('@/assets/day-cloudy.svg');
+        return require(`@/assets/${dayPeriod}/clear.svg`);
+      return require(`@/assets/${dayPeriod}/cloudy.svg`);
     },
     getTemperatureValue(): number {
       if (this.temperature.metric === 'fahrenheit')
