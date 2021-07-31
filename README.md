@@ -25,6 +25,7 @@ Extremely simple weather app made with Vue!
 
  - UI Inspired by  [Andrew D.K. via Dribbble](https://dribbble.com/shots/9897767-Simple-weather-app-design)
  - Challenge for [freeCodeCamp](https://freeCodeCamp.com)
+ - Gradient backgrounds on [cssgradient.io](https://cssgradient.io/gradient-backgrounds/)
   
 ## Lessons Learned
 
