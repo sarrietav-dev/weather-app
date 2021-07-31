@@ -7,7 +7,8 @@
     </header>
     <img :src="getSVGsrc" class="weather-icon" />
     <p class="temperature">
-      {{ temperature.value }} <span :class="temperature.metric"></span>
+      {{ getTemperatureValue }}
+      <span :class="temperature.metric" @click="changeMetric"></span>
     </p>
   </div>
 </template>
@@ -28,7 +29,7 @@ interface AppState {
   };
   temperature: {
     value: number;
-    metric: 'celcius' | 'fahrenheit';
+    metric: 'celsius' | 'fahrenheit';
   };
 }
 
@@ -43,9 +44,16 @@ export default defineComponent({
       },
       temperature: {
         value: 0,
-        metric: 'celcius',
+        metric: 'celsius',
       },
     };
+  },
+  methods: {
+    changeMetric() {
+      if (this.temperature.metric === 'celsius')
+        this.temperature.metric = 'fahrenheit';
+      else this.temperature.metric = 'celsius';
+    },
   },
   computed: {
     getBgColor(): string {
@@ -70,6 +78,11 @@ export default defineComponent({
       if (this.weather.main === 'Clear')
         return require('@/assets/day-sunny.svg');
       return require('@/assets/day-cloudy.svg');
+    },
+    getTemperatureValue(): number {
+      if (this.temperature.metric === 'fahrenheit')
+        return (this.temperature.value * 9) / 5 + 32;
+      return this.temperature.value;
     },
   },
   created() {
@@ -162,7 +175,7 @@ body {
       }
     }
 
-    .celcius {
+    .celsius {
       &::after {
         content: '°C';
       }
