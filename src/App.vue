@@ -6,7 +6,9 @@
       <p class="location">{{ location }}</p>
     </header>
     <img :src="getSVGsrc" class="weather-icon" />
-    <p class="temperature">{{ temperature }} °C</p>
+    <p class="temperature">
+      {{ temperature.value }} <span :class="temperature.metric"></span>
+    </p>
   </div>
 </template>
 
@@ -24,7 +26,10 @@ interface AppState {
     main: WeatherCondition | '';
     description: string;
   };
-  temperature: number;
+  temperature: {
+    value: number;
+    metric: 'celcius' | 'fahrenheit';
+  };
 }
 
 export default defineComponent({
@@ -36,7 +41,10 @@ export default defineComponent({
         main: '',
         description: '',
       },
-      temperature: 0,
+      temperature: {
+        value: 0,
+        metric: 'celcius',
+      },
     };
   },
   computed: {
@@ -80,7 +88,7 @@ export default defineComponent({
           },
         )
         .then((response) => {
-          this.temperature = response.data.main.temp;
+          this.temperature.value = response.data.main.temp;
           this.location = response.data.name;
           const { main, description } = response.data.weather[0];
           this.weather = { main, description };
@@ -140,6 +148,39 @@ body {
 
   .temperature {
     font-size: 4rem;
+
+    span {
+      display: inline-block;
+      transition: all 0.25s;
+
+      &:hover {
+        transform: rotate(360deg) translateY(-0.75rem);
+      }
+
+      &:active {
+        transform: rotate(360deg) translateY(-0.25rem);
+      }
+    }
+
+    .celcius {
+      &::after {
+        content: '°C';
+      }
+
+      &:hover::after {
+        content: '°F';
+      }
+    }
+
+    .fahrenheit {
+      &::after {
+        content: '°F';
+      }
+
+      &:hover::after {
+        content: '°C';
+      }
+    }
   }
 }
 
