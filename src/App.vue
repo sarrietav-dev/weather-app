@@ -71,6 +71,16 @@ export default defineComponent({
       return `${date.getHours()}:${date.getMinutes()}`;
     },
     getSVGsrc() {
+      const hour = Date.prototype.getHours();
+      if (hour > 6 && hour < 18) {
+        if (this.weather.main === 'Rain') return require('@/assets/rain.svg');
+        if (this.weather.main === 'Thunderstorm')
+          return require('@/assets/thunderstorm.svg');
+        if (this.weather.main === 'Snow') return require('@/assets/snow.svg');
+        if (this.weather.main === 'Clear')
+          return require('@/assets/day-sunny.svg');
+        return require('@/assets/day-cloudy.svg');
+      }
       if (this.weather.main === 'Rain') return require('@/assets/rain.svg');
       if (this.weather.main === 'Thunderstorm')
         return require('@/assets/thunderstorm.svg');
