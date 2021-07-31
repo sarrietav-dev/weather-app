@@ -7,7 +7,7 @@ const handler: Handler = async (event) => {
   const { API_KEY } = process.env;
 
   const response = await axios.get(
-    '//api.openweathermap.org/data/2.5/weather',
+    'https://api.openweathermap.org/data/2.5/weather',
     {
       params: {
         lat: lat,
