@@ -91,22 +91,23 @@ export default defineComponent({
     },
   },
   created() {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords;
-      axios
-        .get<CurrentWeatherDataResponse>('api/fetch-weather', {
-          params: {
-            lat: latitude,
-            lon: longitude,
-          },
-        })
-        .then((response) => {
-          this.temperature.value = response.data.main.temp;
-          this.location = response.data.name;
-          const { main, description } = response.data.weather[0];
-          this.weather = { main, description };
-        })
-        .catch((err) => console.error(err));
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        axios
+          .get<CurrentWeatherDataResponse>('api/fetch-weather', {
+            params: {
+              lat: latitude,
+              lon: longitude,
+            },
+          })
+          .then((response) => {
+            this.temperature.value = response.data.main.temp;
+            this.location = response.data.name;
+            const { main, description } = response.data.weather[0];
+            this.weather = { main, description };
+          })
+          .catch((err) => console.error(err));
     });
   },
 });
