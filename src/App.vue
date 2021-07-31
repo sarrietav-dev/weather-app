@@ -127,6 +127,7 @@ body {
   height: 100vh;
   color: #fff;
   font-family: 'Roboto', sans-serif;
+  background-color: #181a1b;
 }
 
 #app,
