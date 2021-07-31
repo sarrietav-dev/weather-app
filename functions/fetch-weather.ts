@@ -1,4 +1,3 @@
-import { CurrentWeatherDataResponse } from './../src/types/weather-api.d';
 import { Handler } from '@netlify/functions';
 import axios from 'axios';
 
@@ -7,7 +6,7 @@ const handler: Handler = async (event) => {
 
   const { API_KEY } = process.env;
 
-  const response = await axios.get<CurrentWeatherDataResponse>(
+  const response = await axios.get(
     'http://api.openweathermap.org/data/2.5/weather',
     {
       params: {
