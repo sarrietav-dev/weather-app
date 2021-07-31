@@ -89,17 +89,12 @@ export default defineComponent({
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
       axios
-        .get<CurrentWeatherDataResponse>(
-          'http://api.openweathermap.org/data/2.5/weather',
-          {
-            params: {
-              lat: latitude,
-              lon: longitude,
-              appid: '8e71173fd511d2582e29c50306f73b14',
-              units: 'metric',
-            },
+        .get<CurrentWeatherDataResponse>('api/fetch-weather', {
+          params: {
+            lat: latitude,
+            lon: longitude,
           },
-        )
+        })
         .then((response) => {
           this.temperature.value = response.data.main.temp;
           this.location = response.data.name;
